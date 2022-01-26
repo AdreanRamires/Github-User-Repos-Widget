@@ -1,6 +1,7 @@
 const submitHandler = (e) => {
   e.preventDefault();
   if (username.value == "") {
+    clearInput();
     errorHandler("empty");
   } else {
     getRepositories();
