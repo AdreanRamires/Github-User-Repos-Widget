@@ -8,7 +8,7 @@ async function getRepositories() {
   const response = await fetch(url);
 
   if (response.ok) {
-    errorMessage.textContent = '';
+    errorMessage.textContent = "";
     const data = await response.json();
     renderRepositories(data, response);
   } else {
@@ -18,6 +18,7 @@ async function getRepositories() {
 }
 
 const renderRepositories = (data, response) => {
+  repositoriesList.innerHTML = "";
   if (data.length > 0) {
     data.forEach((repository) => {
       const li = document.createElement("li");
@@ -50,7 +51,6 @@ const calculateDate = (repository) => {
 
 const clearInput = () => {
   username.value = "";
-  renderRepositories.innerHTML = "";
 };
 
 const errorHandler = (response) => {
