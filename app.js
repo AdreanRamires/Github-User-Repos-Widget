@@ -1,6 +1,10 @@
 const submitHandler = (e) => {
   e.preventDefault();
-  getRepositories();
+  if (username.value == "") {
+    errorHandler("empty");
+  } else {
+    getRepositories();
+  }
 };
 
 async function getRepositories() {
@@ -10,15 +14,15 @@ async function getRepositories() {
   if (response.ok) {
     errorMessage.textContent = "";
     const data = await response.json();
+    clearInput();
     renderRepositories(data, response);
   } else {
+    clearInput();
     errorHandler(response);
   }
-  clearInput();
 }
 
-const renderRepositories = (data, response) => {
-  repositoriesList.innerHTML = "";
+const renderRepositories = (data) => {
   if (data.length > 0) {
     data.forEach((repository) => {
       const li = document.createElement("li");
@@ -37,7 +41,7 @@ const renderRepositories = (data, response) => {
       repositoriesList.appendChild(li);
     });
   } else {
-    errorHandler(response);
+    errorHandler(data);
   }
 };
 
@@ -51,13 +55,16 @@ const calculateDate = (repository) => {
 
 const clearInput = () => {
   username.value = "";
+  repositoriesList.innerHTML = "";
 };
 
-const errorHandler = (response) => {
-  if (response.status == 404) {
+const errorHandler = (error) => {
+  if (error.status == 404) {
     errorMessage.textContent = "Username not found";
-  } else {
+  } else if (error.length == 0) {
     errorMessage.textContent = "User does not have any repositories";
+  } else if (error == "empty") {
+    errorMessage.textContent = "Please enter a username";
   }
 };
 
