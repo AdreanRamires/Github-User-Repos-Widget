@@ -1,4 +1,4 @@
-# Github-User-Repos-Widget
+# Github User Repo Widget
 
 
-## Test heading
+# Test heading
