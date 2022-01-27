@@ -1,4 +1,7 @@
 # Github User Repo Widget
 
 
-# Test heading
+### This widget will provide user's repositories with additional information as 
+- Description 
+- Date of creation
+- Link to actual repository
